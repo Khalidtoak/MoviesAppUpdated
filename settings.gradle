@@ -1,0 +1,5 @@
+include ':database'
+include ':network'
+include ':base'
+include ':app'
+rootProject.name = "technical test"

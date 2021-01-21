@@ -1,0 +1,67 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_BASE_URL", '"https://api.themoviedb.org/3/movie"'
+            buildConfigField "String", "API_KEY", '"b90d08104f6ddf9bb30c704bccac4f6a"'
+        }
+        debug {
+            minifyEnabled false
+            buildConfigField "String", "APP_BASE_URL", '"https://api.themoviedb.org/3/movie/"'
+            buildConfigField "String", "API_KEY", '"b90d08104f6ddf9bb30c704bccac4f6a"'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(":base")
+    // okhttp
+    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    // retrofit
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    //Moshi converter
+    api "com.squareup.retrofit2:converter-moshi:$moshiCoverterVersion"
+    // logging interceptor
+    api "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltCompilerVersion"
+    implementation "com.google.dagger:hilt-core:$hiltVersion"
+
+}
