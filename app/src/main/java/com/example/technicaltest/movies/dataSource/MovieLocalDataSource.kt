@@ -14,6 +14,8 @@ class MovieLocalDataSource @Inject constructor(private val movieDao: MovieDao) :
     }
 
     override suspend fun saveMovies(movies: List<MovieEntity>) {
+        // doing this so room doesn't insert a new row if there is a new movie with a different id and we want to keep the list the same size
+        movieDao.deleteMovies()
         movieDao.insertMovies(movies)
     }
 
