@@ -24,7 +24,7 @@ class MovieDetailViewModel @AssistedInject constructor(
         fetchMovieDetails()
     }
 
-    private fun fetchMovieDetails() {
+    fun fetchMovieDetails() {
         publish(MovieDetailScreenState.Loading)
         launchCoroutine(
             {
