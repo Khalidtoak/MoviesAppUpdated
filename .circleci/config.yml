@@ -10,4 +10,8 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Build project
           command: ./gradlew build
+      - run:
+          name: Run Unit Tests
+          command: ./gradlew :app:testDebugUnitTest --no-daemon
